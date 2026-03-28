@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text, TextInput, View } from 'react-native'
+import {auth} from '../../firebaseConfig'
+import { signInWithEmailAndPassword } from 'firebase/auth'
 
 import CustomButton from '../../component/CustomButton'
 
@@ -8,21 +10,15 @@ export default function Login({navigation, route}) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    function validateAttempt() {
-        if(email === '' && password === '') {
-            alert('Fill in your email and password')
-            return
-        }
-
-        if(email === '') {
-            alert('Email cannot be empty')
-            return
-        }
-
-        if(password === '') {
-            alert('Password cannot be empty')
-            return
-        }
+    function handleLogin(email, password) {
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                console.log('Logged in', userCredential.user)
+            }
+        ).catch((error) => {
+            console.error(error.message)
+        })
+    }
 
         navigation.navigate('Home', {email:email})
 

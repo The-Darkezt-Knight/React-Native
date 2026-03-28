@@ -1,6 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import React from 'react'
+import './src/firebaseConfig'
 
 import Login from './navigation/screens/Login'
 import Home from './navigation/screens/Main'
